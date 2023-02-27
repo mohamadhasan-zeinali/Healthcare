@@ -5,8 +5,8 @@ from django.db.models.base import Model
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import  MainModel, NewsLater , Category, Tag
-from .forms import NewsLatterForm, SignUp
+from .models import  MainModel, NewsLater , Category, Tag , CommentModel
+from .forms import NewsLatterForm, SignUp , Comment
 from django.views.generic.edit import FormView
 from django.db.models import Q
 
@@ -71,9 +71,19 @@ class ReviewSmartwatch(ListView):
     template_name = "main/smart-watch.html"
 
 class Detail(DetailView):
-    queryset= MainModel.objects.all()
-    template_name='main/single.html'
-    
+    #queryset= MainModel.objects.all()
+    #template_name='main/single.html'
+    model = MainModel
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        comments_connected =CommentModel.objects.filter(
+        blogpost_connected=self.get_object()).order_by('-date_posted')
+        data['comments'] = comments_connected
+        if self.request.user.is_authenticated:
+         data['comment_form'] = Comment(instance=self.request.user)
+
+        return data
 
     
     """def get_context_data(self, **kwargs):

@@ -133,7 +133,7 @@ class CommentModel(models.Model):
     post = models.ForeignKey(MainModel,
                             on_delete=models.CASCADE,
                             related_name='comments' , null=True)
-    name = models.CharField(max_length= 100)
+    name = models.ForeignKey(User,on_delete=models.CASCADE)
     email = models.EmailField()
     comment = models.TextField(max_length=600)
     created = models.DateTimeField(auto_now_add=True , null=True) 
@@ -141,4 +141,6 @@ class CommentModel(models.Model):
     active = models.BooleanField(default=True , null=True) 
 
     def __str__(self): 
-        return 'Comment by {} on {}'.format(self.name, self.post) 
+        return 'Comment by {} on {}'.format(self.name, self.post)
+    
+    
