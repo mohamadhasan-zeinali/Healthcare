@@ -2,6 +2,10 @@ from django import forms
 
 from .models import NewsLater , UserReqester , CommentModel
 
+# search 
+class SearchForm(forms.Form):
+    search = forms.CharField()
+
 # Comment form 
 class Comment(forms.ModelForm):
     class Meta:

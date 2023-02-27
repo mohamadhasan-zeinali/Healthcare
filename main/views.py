@@ -5,10 +5,11 @@ from django.db.models.base import Model
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import  MainModel, NewsLater , Category, Tag , CommentModel
-from .forms import NewsLatterForm, SignUp , Comment
+from .models import  MainModel, NewsLater , Category, Tag
+from .forms import NewsLatterForm, SignUp , SearchForm, Comment
 from django.views.generic.edit import FormView
 from django.db.models import Q
+import requests
 
 #news form 
 class Form(FormView):
@@ -23,12 +24,28 @@ class Form(FormView):
                 form.save()
         context = {'form' : form}
         return render(request ,  'main/index.html' ,  context)
+    
+
 class Main(ListView):
     queryset= MainModel.objects.filter(Q(status = 'p') | Q(status= 'x'))
     fields = '__all__'
     template_name = "main/home-2.html"
     context_object_name = 'blog_list'
     paginate_by = 10
+"""    model = MainModel
+    def get_queryset(self):
+        person = MainModel.objects.all()
+        #name = self.kwargs.get('title',)
+        #object_list = self.model.objects.all()
+        form = SearchForm()
+        if 'search' in request.GET: 
+            form = SearchForm(request.GET)
+            if form.is_valid():
+                cd = form.cleaned_data('search')
+                person = person.filter(title=cd)
+        return render(request,{'person':person, 'fomr':form})"""
+            
+
 
 #//TODO //SOLVE THE BUG FOR SignUp FORM 
 
@@ -71,19 +88,9 @@ class ReviewSmartwatch(ListView):
     template_name = "main/smart-watch.html"
 
 class Detail(DetailView):
-    #queryset= MainModel.objects.all()
-    #template_name='main/single.html'
-    model = MainModel
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-
-        comments_connected =CommentModel.objects.filter(
-        blogpost_connected=self.get_object()).order_by('-date_posted')
-        data['comments'] = comments_connected
-        if self.request.user.is_authenticated:
-         data['comment_form'] = Comment(instance=self.request.user)
-
-        return data
+    queryset= MainModel.objects.all()
+    template_name='main/single.html'
+    
 
     
     """def get_context_data(self, **kwargs):
