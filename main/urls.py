@@ -3,14 +3,10 @@ from .views import (
         Main,
         Review,
         Detail,
-        ReviewLaptop,
-        ReviewSmartphone,
-        ReviewPC,
-        ReviewSmartwatch,
         CategoryList,
         #Page404, 
         TagaListView, 
-        SignUp
+        #SignUp
 )
 
 app_name="main"
@@ -25,7 +21,7 @@ urlpatterns =[
 
     path('tag/<slug:slug>',TagaListView.as_view(), name="tag"),
     path('tag/<slug:slug>/page/<int:page>',TagaListView.as_view(), name="tag"),
-    path('signup/', SignUp.as_view(), name = 'signup'),
+    #path('signup/', SignUp.as_view(), name = 'signup'),
 
     #path('reviews/laptop/',ReviewLaptop.as_view(), name="laptop"),
     #path('reviews/smartphone/',ReviewSmartphone.as_view(), name="smart-phone"),

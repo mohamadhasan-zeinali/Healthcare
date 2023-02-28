@@ -365,7 +365,7 @@
                             </div>
                         </div>
                         <!--Comments-->
-                        <div class="comments-area">
+                        <!--<div class="comments-area">
                             <h3 class="mb-30">3 نظرات</h3>
                             <div class="comment-list">
                                 <div class="single-comment justify-content-between d-flex">
@@ -442,12 +442,21 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
+                        <h2 id="comments">Comments</h2>
+                        {% for comment in post.comment_set.all %}
+                        <b>{{ comment.name }}</b> said <b>{{ comment.created_on|timesince }} ago</b>
+                        <p>{{ comment.comment }}</p>
+                        {% empty %}
+                        <p>Feel free to leave the first comment!</p>
+                        {% endfor %}
                         <!--comment form-->
                         <div class="comment-form">
                             <h3 class="mb-30">ارسال نظرات</h3>
-                            <form class="form-contact comment_form" action="#" id="commentForm">
-                                <div class="row">
+                            <form  method='post' class="form-contact comment_form" action="#" id="commentForm">
+                                {% csrf_token %}
+                                {{form.as_p}}
+                               <!-- <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <input class="form-control" name="name" id="name" type="text" placeholder="نام">
@@ -468,12 +477,15 @@
                                             <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="نظرات"></textarea>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="form-group">
                                     <button type="submit" class="button button-contactForm">ارسال نظر</button>
                                 </div>
                             </form>
                         </div>
+
+
+
                     </div>
                     
                    {% Sidebar_left %}

@@ -4,12 +4,9 @@ from main.views import Main
 from .models import  MainModel , Category,NewsLater ,IPAdress, Tag , CommentModel
 
 # comment admin 
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'post', 'created', 'active')
-    list_filter = ('active', 'created', 'updated')
-    search_fields = ('name', 'email', 'body')
-
-admin.site.register(CommentModel,CommentAdmin)
+class CommentInline(admin.StackedInline):
+    model = CommentModel
+    extra = 0
 
 class From_admin(admin.ModelAdmin):
     list_display =['name', 'email']
@@ -20,7 +17,9 @@ admin.site.register(Category,Category_admin)
 
 class Main_Admin(admin.ModelAdmin):
     list_display = ['title', 'status', 'category_to_str' , 'slug' , 'date' ]
-
+    inlines = [
+        CommentInline,
+    ]
     def category_to_str(self, obj):
         return ", ".join([category.title for category in  obj.category.all()])
     category_to_str.short_description = "category"

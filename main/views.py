@@ -5,14 +5,14 @@ from django.db.models.base import Model
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import  MainModel, NewsLater , Category, Tag
-from .forms import NewsLatterForm, SignUp , SearchForm, Comment
+from .models import  MainModel, Category, Tag
+from .forms import  SearchForm, CommentForm
 from django.views.generic.edit import FormView
 from django.db.models import Q
 import requests
 
 #news form 
-class Form(FormView):
+"""class Form(FormView):
     form_class = NewsLatterForm
 
 
@@ -23,7 +23,7 @@ class Form(FormView):
             if form.is_valid():
                 form.save()
         context = {'form' : form}
-        return render(request ,  'main/index.html' ,  context)
+        return render(request ,  'main/index.html' ,  context)"""
     
 
 class Main(ListView):
@@ -50,7 +50,7 @@ class Main(ListView):
 #//TODO //SOLVE THE BUG FOR SignUp FORM 
 
 # signUp view 
-class SignUp(FormView):
+"""class SignUp(FormView):
     form = SignUp()
     def signup(request):
         if request.method =='POST':
@@ -59,7 +59,7 @@ class SignUp(FormView):
                 form.save()
         else:
             form = SignUp()
-        return render(request, 'SignUp.html',{'fomr':form} )
+        return render(request, 'SignUp.html',{'fomr':form} )"""
 
 
 class Review(ListView):
@@ -67,44 +67,56 @@ class Review(ListView):
     fields = '__all__'
     template_name = "main/works.html"
 
-class ReviewPC(ListView):
-    model= MainModel
-    fields = '__all__'
-    template_name = "main/PC.html"
+class PostDetailView(DetailView):
 
-class ReviewSmartphone(ListView):
-    model= MainModel
-    fields = '__all__'
-    template_name = "main/smartphone.html"
+    def get(self, request, *args, **kwargs):
+        view = Detail.as_view()
+        return view(request, *args, **kwargs)
 
-class ReviewLaptop(ListView):
-    model= MainModel
-    fields = '__all__'
-    template_name = "main/laptop.html"
-
-class ReviewSmartwatch(ListView):
-    model= MainModel
-    fields = '__all__'
-    template_name = "main/smart-watch.html"
+    def post(self, request, *args, **kwargs):
+        view = Detail.as_view()
+        return view(request, *args, **kwargs)
 
 class Detail(DetailView):
-    queryset= MainModel.objects.all()
+    model = MainModel
     template_name='main/single.html'
+    context_object_name= 'post'
     
-
-    
-    """def get_context_data(self, **kwargs):
-
-        # Call the base implementation first to get a context
-
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['form'] = CommentForm()
+        return context
+ 
+#post comment 
+from django.views.generic import FormView
+from django.views.generic.detail import SingleObjectMixin
+from django.urls import reverse
+from .forms import CommentForm
 
-        # Add in a QuerySet of all the books
+class PostComment(SingleObjectMixin, FormView):
+    model = MainModel
+    form_class = CommentForm
+    template_name = 'main/single.html'
 
-        context['blog_list'] = MainModel.objects.all()
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
 
-        return context"""
+    def get_form_kwargs(self):
+        kwargs = super(PostComment, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
+    def form_valid(self, form):
+        comment = form.save(commit=False)
+        comment.post = self.object
+        comment.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        post = self.get_object()
+        return reverse('post_detail', kwargs={'pk': post.pk}) + '#comments'
+    
 class CategoryList(ListView):
     paginate_by = 10
     template_name = 'main/category_list.html'

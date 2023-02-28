@@ -140,5 +140,9 @@ class CommentModel(models.Model):
     updated = models.DateTimeField(auto_now=True , null=True) 
     active = models.BooleanField(default=True , null=True) 
 
-    def __str__(self): 
-        return 'Comment by {} on {}'.format(self.name, self.post) 
+
+    """class Meta:
+        ordering = ['created_on']"""
+
+    def __str__(self):
+        return self.comment[:60]
