@@ -6,8 +6,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+#redirect_ url
+LOGIN_REDIRECT_URL="account:home"
+LOGIN_URL="account:login"
+LOGOUT_REDIRECT_URL="account:login"
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-n$*@)san0ug0irmz=x3s7dbvtcuw+a&@#&$09rr&o^7$w%o0eg'
@@ -32,7 +36,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'extensions',
     'django.contrib.sites',
-    'django.contrib.sitemaps'
+    'django.contrib.sitemaps', 
+    'account'
     
 ]
 SITE_ID = 1 

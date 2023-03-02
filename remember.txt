@@ -2,3 +2,6 @@ git -> دوشنبه 12/8
 # coomment model add + form model added + view added + project push to the git + search form added
 git -> سه شنبه 12/9
 #comment test and implemented but we have bug for sent and show + 
+
+git -> پنج شنبه 12/11 
+# account add just neet to implimentation html as css + 
