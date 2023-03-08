@@ -8,7 +8,7 @@ from django.utils import timezone
 #اضافه کردن  ادیتور سی کی به پروژه 
 from ckeditor_uploader.fields import RichTextUploadingField
 from ckeditor.fields  import RichTextField
-from matplotlib.pyplot import title
+#from matplotlib.pyplot import title
 
 # jalali 
 from extensions.utils import jalali_convertor
