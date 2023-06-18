@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
     'crispy_forms',
-    'ckeditor',
+    #'ckeditor',
     'extensions',
     'django.contrib.sites',
     'django.contrib.sitemaps', 
@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-"""
-DATABASES = {
+
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME':'Lanmis',
@@ -135,7 +135,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
 #STATIC_ROOT=os.path.join(BASE_DIR, 'static_root')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static_root')
+    os.path.join(BASE_DIR,'static')
    
 ]
 

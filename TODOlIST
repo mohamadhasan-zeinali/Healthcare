@@ -1,0 +1,13 @@
+* show the article list --> all people can see
+* create article api  -->‌just superuser can see and doing that
+* show the article detail -->--> all people can see
+* edit / delete / update article -->‌just superuser or auther can do that
+* List of doctors api   --> all people can see
+* detail of each doctors api -->‌all peaple can see
+* 
+
+
+
+--------   Questions ----------------------
+1- the rule of serializers 
+2- .gitignore in git 

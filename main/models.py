@@ -6,8 +6,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 #اضافه کردن  ادیتور سی کی به پروژه 
-from ckeditor_uploader.fields import RichTextUploadingField
-from ckeditor.fields  import RichTextField
+#from ckeditor_uploader.fields import RichTextUploadingField
+#from ckeditor.fields  import RichTextField
 #from matplotlib.pyplot import title
 
 # jalali 
@@ -85,14 +85,14 @@ class MainModel(models.Model):
         title=models.CharField(max_length=100 ,  verbose_name="title" ,null="False")
         slug=models.SlugField(max_length=50, verbose_name="url" ,null="False")
         thumbnail=models.ImageField(upload_to="images",verbose_name="picture-url" ,null="True")
-        category=models.ManyToManyField(Category,verbose_name="category",related_name="articles")
-        #description=models.TextField(max_length=500, verbose_name="description")
-        description =RichTextField(blank="True", null="True")
-        description =RichTextUploadingField(blank="True", null="True")
+        #category=models.ManyToManyField(Category,verbose_name="category",related_name="articles")
+        description=models.TextField(max_length=500, verbose_name="description")
+        #description =RichTextField(blank="True", null="True")
+        #description =RichTextUploadingField(blank="True", null="True")
         thumbnail=models.ImageField(upload_to="images",verbose_name="picture-url" ,null="True")
         date=models.DateTimeField(default=timezone.now)
         status=models.CharField(max_length=3,choices=STATUS_CHOICES , verbose_name="status",null="False")
-        tags = models.ManyToManyField(Tag, null = True , blank= True ,  related_name='tags' , verbose_name=' برچسب')
+        #tags = models.ManyToManyField(Tag, null = True , blank= True ,  related_name='tags' , verbose_name=' برچسب')
 
         """def save(self, *args, **kwargs):
             super(MainModel, self).save(*args, **kwargs)
