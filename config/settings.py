@@ -31,19 +31,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main.apps.MainConfig',
-    'crispy_forms',
+    # 'main.apps.MainConfig',
+    # 'crispy_forms',
     #'ckeditor',
-    'extensions',
-    'django.contrib.sites',
-    'django.contrib.sitemaps', 
-    'account', 
+    # 'extensions',
+    # 'django.contrib.sites',
+    # 'django.contrib.sitemaps', 
+    # 'account', 
     'api', 
     'rest_framework',
     
 ]
-SITE_ID = 1 
-CKEDITOR_UPLOAD_PATH= "uploads/"
+# SITE_ID = 1 
+# CKEDITOR_UPLOAD_PATH= "uploads/"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'main.middleware.IPAdreessMiddleware'
+    # 'main.middleware.IPAdreessMiddleware'
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/ 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,5 +1,0 @@
-// TODO 
-1- find the  best way for signup account + implimentation 
-2- think about idea + implimentation business plan
--> create model to save comment form  + insert google captcha for that with django-simple-captcha
-

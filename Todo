@@ -1,6 +1,6 @@
-* show the article list --> all people can see
-* create article api  -->‌just superuser can see and doing that
-* show the article detail -->--> all people can see
+* show the article list --> all people can see  __done__
+* create article api  -->‌just superuser can see and doing that __done__
+* show the article detail -->--> all people can see __done__
 * edit / delete / update article -->‌just superuser or auther can do that
 * List of doctors api   --> all people can see
 * detail of each doctors api -->‌all peaple can see
