@@ -14,7 +14,7 @@ LOGOUT_REDIRECT_URL="account:login"
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n$*@)san0ug0irmz=x3s7dbvtcuw+a&@#&$09rr&o^7$w%o0eg'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
